@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="row justify-content-center">
+  <div class="col-lg-9">
+
+    <div class="text-center mb-5">
+      <div class="hero-icon mb-3"><i class="fa-solid fa-shield-halved"></i></div>
+      <h2 class="fw-bold">About SpamShield</h2>
+      <p class="text-muted lead">A Machine Learning powered spam email classifier</p>
+    </div>
+
+    <div class="row g-4 mb-4">
+      <div class="col-md-6">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-body p-4">
+            <h5 class="fw-bold mb-3"><i class="fa-solid fa-bullseye text-primary me-2"></i>Objective</h5>
+            <p class="text-muted">To automatically detect and classify email messages as Spam or Legitimate (Not Spam) using Natural Language Processing and Machine Learning techniques, reducing the manual effort required to filter unwanted emails.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-body p-4">
+            <h5 class="fw-bold mb-3"><i class="fa-solid fa-gears text-primary me-2"></i>How It Works</h5>
+            <ol class="text-muted ps-3">
+              <li>Email text is cleaned and preprocessed</li>
+              <li>TF-IDF converts text to numerical features</li>
+              <li>ML model predicts Spam or Not Spam</li>
+              <li>Confidence score is returned</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-4 mb-4">
+      <div class="col-md-4">
+        <div class="card border-0 shadow-sm h-100 text-center">
+          <div class="card-body p-4">
+            <i class="fa-solid fa-robot fa-2x text-primary mb-3"></i>
+            <h6 class="fw-bold">Naive Bayes</h6>
+            <p class="text-muted small">Probabilistic classifier based on Bayes theorem. Fast, accurate, ideal for text classification.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card border-0 shadow-sm h-100 text-center">
+          <div class="card-body p-4">
+            <i class="fa-solid fa-chart-line fa-2x text-success mb-3"></i>
+            <h6 class="fw-bold">Logistic Regression</h6>
+            <p class="text-muted small">Linear model for binary classification. Interpretable coefficients, great for viva explanation.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card border-0 shadow-sm h-100 text-center">
+          <div class="card-body p-4">
+            <i class="fa-solid fa-file-word fa-2x text-warning mb-3"></i>
+            <h6 class="fw-bold">TF-IDF</h6>
+            <p class="text-muted small">Term Frequency-Inverse Document Frequency. Converts raw email text into meaningful numerical features.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card border-0 shadow-sm mb-4">
+      <div class="card-body p-4">
+        <h5 class="fw-bold mb-3"><i class="fa-solid fa-layer-group text-primary me-2"></i>Tech Stack</h5>
+        <div class="row g-2">
+          <div class="col-auto"><span class="badge bg-primary fs-6 px-3 py-2">Python</span></div>
+          <div class="col-auto"><span class="badge bg-secondary fs-6 px-3 py-2">Flask</span></div>
+          <div class="col-auto"><span class="badge bg-success fs-6 px-3 py-2">scikit-learn</span></div>
+          <div class="col-auto"><span class="badge bg-warning text-dark fs-6 px-3 py-2">NLTK</span></div>
+          <div class="col-auto"><span class="badge bg-info text-dark fs-6 px-3 py-2">Bootstrap 5</span></div>
+          <div class="col-auto"><span class="badge bg-danger fs-6 px-3 py-2">TF-IDF</span></div>
+          <div class="col-auto"><span class="badge bg-dark fs-6 px-3 py-2">Pandas / NumPy</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card border-0 shadow-sm">
+      <div class="card-body p-4">
+        <h5 class="fw-bold mb-3"><i class="fa-solid fa-code text-primary me-2"></i>API Endpoint</h5>
+        <p class="text-muted">You can also use the REST API directly:</p>
+        <pre class="bg-dark text-light p-3 rounded small">POST /api/predict
+Content-Type: application/json
+
+{
+  "message": "Congratulations! You have won a prize...",
+  "algo": "nb"
+}</pre>
+        <p class="text-muted small mb-0">Returns: prediction, confidence, and algorithm used.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}
