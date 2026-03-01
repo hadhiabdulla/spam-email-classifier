@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div>
+    <h3 class="fw-bold mb-1"><i class="fa-solid fa-clock-rotate-left me-2"></i>Classification History</h3>
+    <p class="text-muted mb-0">All emails analyzed in this session</p>
+  </div>
+  <a href="{{ url_for('index') }}" class="btn btn-primary">
+    <i class="fa-solid fa-plus me-1"></i>New Analysis
+  </a>
+</div>
+
+{% if history %}
+<div class="row g-3 mb-4">
+  <div class="col-md-4">
+    <div class="stat-card text-center p-3">
+      <div class="stat-number text-danger">{{ history|selectattr('label','equalto','Spam')|list|length }}</div>
+      <div class="stat-label">Spam</div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="stat-card text-center p-3">
+      <div class="stat-number text-success">{{ history|selectattr('label','equalto','Not Spam')|list|length }}</div>
+      <div class="stat-label">Not Spam</div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="stat-card text-center p-3">
+      <div class="stat-number text-primary">{{ history|length }}</div>
+      <div class="stat-label">Total</div>
+    </div>
+  </div>
+</div>
+
+<div class="card shadow-sm border-0">
+  <div class="table-responsive">
+    <table class="table table-hover align-middle mb-0">
+      <thead class="table-dark">
+        <tr>
+          <th>#</th>
+          <th>Time</th>
+          <th>Email Preview</th>
+          <th>Label</th>
+          <th>Confidence</th>
+          <th>Algorithm</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in history %}
+        <tr>
+          <td class="text-muted">{{ loop.index }}</td>
+          <td><small class="text-muted">{{ item.time }}</small></td>
+          <td><small>{{ item.text_preview }}</small></td>
+          <td>
+            <span class="badge rounded-pill {{ 'bg-danger' if item.label=='Spam' else 'bg-success' }}">
+              {% if item.label == 'Spam' %}<i class="fa-solid fa-triangle-exclamation me-1"></i>{% else %}<i class="fa-solid fa-circle-check me-1"></i>{% endif %}
+              {{ item.label }}
+            </span>
+          </td>
+          <td>
+            <div class="d-flex align-items-center gap-2">
+              <div class="progress flex-fill" style="height:6px; min-width:60px;">
+                <div class="progress-bar {{ 'bg-danger' if item.label=='Spam' else 'bg-success' }}"
+                     style="width:{{ item.confidence }}%"></div>
+              </div>
+              <small class="fw-semibold">{{ item.confidence }}%</small>
+            </div>
+          </td>
+          <td><small class="badge bg-light text-dark">{{ item.algo }}</small></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% else %}
+<div class="text-center py-5">
+  <i class="fa-solid fa-inbox fa-4x text-muted mb-3"></i>
+  <h5 class="text-muted">No history yet</h5>
+  <p class="text-muted">Start by analyzing an email on the home page.</p>
+  <a href="{{ url_for('index') }}" class="btn btn-primary">
+    <i class="fa-solid fa-house me-1"></i>Go to Home
+  </a>
+</div>
+{% endif %}
+{% endblock %}
